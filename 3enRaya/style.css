@@ -1,0 +1,244 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+html,body {
+    height: 100%;
+}
+
+body{
+    overflow: hidden;
+    background-image: url(https://static.vecteezy.com/system/resources/previews/009/877/673/non_2x/pixel-art-sky-background-with-clouds-cloudy-blue-sky-for-8bit-game-on-white-background-vector.jpg);
+    background-position: center;
+    background-size: cover;
+    margin: 0 auto;
+}
+
+/* PARTE AARON */
+
+#cont-formulario {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fceed6;
+    height: 100vh;
+    background-image: url(https://static.vecteezy.com/system/resources/previews/009/877/673/non_2x/pixel-art-sky-background-with-clouds-cloudy-blue-sky-for-8bit-game-on-white-background-vector.jpg);
+    background-position: center;
+    background-size: cover;
+  }
+  
+  h1, h2 {
+    font-size: 50px;
+  }
+  
+  h2 {
+    font-size: 50px;
+    padding-top: 100px;
+  }
+  
+  p {
+    margin-top: 60px;
+  }
+  
+  form {
+    box-shadow: 0px 21px 26px 11px rgba(3, 3, 3, 0.452);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: snow;
+    width: 25%;
+    border-radius: 5px;
+    height: 25%;
+  }
+  
+  #formulario {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    background-color: snow;
+  }
+  
+  #formulario input {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid black;
+    text-align: center;
+    align-self: center;
+    background-color: #ffff;
+    border-radius: 5px;
+  }
+  
+  #J1:hover {
+    background-color: #09f;
+    color: white;
+  }
+  
+  #J2:hover {
+    background-color: #ff6700;
+    color: white;
+  }
+  
+  #formulario input[type="submit"]:hover {
+    background-color: limegreen;
+  }
+  
+  /* cuando pongo el ratón encima de loca q haga la palabra locas movimientos */
+  
+  @keyframes movimientosLocos {
+    0%, 100% {
+      transform: translate(0, 0);
+      color: #FF0000;
+    }
+    25% {
+      transform: translate(100px, -5px);
+      color: #FFFF00;
+    }
+    50% {
+      transform: translate(-100px, 67px);
+      color: #008000;
+    }
+    75% {
+      transform: translate(23px, -100px);
+      color: #4B0082;
+    }
+  }
+  
+  .locas:hover {
+    display: inline-block;
+    animation: movimientosLocos 1s infinite;
+  }
+  
+/* PARTE MIGUEL */
+
+.cont-juego{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.cont-turno{
+    /* background-color: red; */
+    width: 100%;
+    text-align: center;
+    padding: 10px; /* Igual genera margen arriba, checkear por si acaso al final esto */
+}
+
+.cont-timer{
+    background-color: lightblue;
+    text-align: center;
+    padding: 10px 40px;
+    border: 1px solid black;
+    border-radius: 20px;
+}
+
+.cont-tablero{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+}
+.cont-fichas-azules {
+    display: grid;
+    grid-template-columns: repeat(3,100px);
+    grid-template-rows: repeat(3,100px);
+    gap: 25px;
+    /* border: 3px solid #09f; */
+    border-radius: 20px;
+    align-self: center;
+    padding: 15px;
+
+    /* display: grid;
+    grid-template-columns: repeat(3,150px);
+    grid-template-rows: repeat(3,150px);
+    gap: 50px;
+    border: 3px solid #09f;
+    border-radius: 20px;
+    height: 70%;
+    align-self: center; */
+
+}
+.ficha-azul{
+    background-color: #09f;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    align-self: center;
+    justify-self: center;
+    cursor: grab;
+}
+
+.ficha-azul:hover{
+    background-color: rgb(0, 124, 207);
+
+}
+
+.cont-fichas-naranjas{
+    display: grid;
+    grid-template-columns: repeat(3,100px);
+    grid-template-rows: repeat(3,100px);
+    gap: 25px;
+    border: 3px solid #FF6700;
+    border-radius: 20px;
+    align-self: center;
+    padding: 15px;
+}
+
+.ficha-naranja{
+    background-color: #FF6700;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    align-self: center;
+    justify-self: center;
+    cursor: grab;
+}
+.ficha-naranja:hover{
+    background-color: #dd5800;
+
+}
+.s{
+    align-self: flex-end;
+    width: 30%;
+    height: 30%;
+}
+.l{
+    width: 70%;
+    height: 70%;
+}
+.xl{
+    width: 100%;
+    height: 100%;
+}
+.tablero{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin:3rem;
+    padding: 15px;
+    border: 2px solid black;
+}
+.casilla-tablero{
+    width: 200px;
+    height: 200px;
+    border: 2px solid black;
+    background-color: rgba(255, 255, 255, 0.623);
+}
+
+.casilla-tablero:hover{
+    background-color:#f3f1f1;
+}
+
+.inactiva{
+    display: none;
+}

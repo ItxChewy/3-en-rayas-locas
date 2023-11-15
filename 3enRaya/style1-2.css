@@ -1,0 +1,147 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+html,body {
+    height: 100%;
+}
+
+body{
+    overflow: hidden;
+    background-image: url(https://static.vecteezy.com/system/resources/previews/009/877/673/non_2x/pixel-art-sky-background-with-clouds-cloudy-blue-sky-for-8bit-game-on-white-background-vector.jpg);
+    background-position: center;
+    background-size: cover;
+    margin: 0 auto;
+}
+
+.cont-juego{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.cont-turno{
+    /* background-color: red; */
+    width: 100%;
+    text-align: center;
+    padding: 10px; /* Igual genera margen arriba, checkear por si acaso al final esto */
+}
+
+.cont-timer{
+    background-color: lightblue;
+    text-align: center;
+    padding: 10px 40px;
+    border: 1px solid black;
+    border-radius: 20px;
+}
+
+.cont-tablero{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+}
+.cont-fichas-azules {
+    display: grid;
+    grid-template-columns: repeat(3,100px);
+    grid-template-rows: repeat(3,100px);
+    gap: 25px;
+    /* border: 3px solid #09f; */
+    border-radius: 20px;
+    align-self: center;
+    padding: 15px;
+
+    /* display: grid;
+    grid-template-columns: repeat(3,150px);
+    grid-template-rows: repeat(3,150px);
+    gap: 50px;
+    border: 3px solid #09f;
+    border-radius: 20px;
+    height: 70%;
+    align-self: center; */
+
+}
+.ficha-azul{
+    background-color: #09f;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    align-self: center;
+    justify-self: center;
+    cursor: grab;
+    border: 1px solid black;
+}
+
+.ficha-azul:hover{
+    background-color: rgb(0, 124, 207);
+
+}
+
+.cont-fichas-naranjas{
+    display: grid;
+    grid-template-columns: repeat(3,100px);
+    grid-template-rows: repeat(3,100px);
+    gap: 25px;
+    border: 3px solid #FF6700;
+    border-radius: 20px;
+    align-self: center;
+    padding: 15px;
+}
+
+.ficha-naranja{
+    background-color: #FF6700;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    align-self: center;
+    justify-self: center;
+    cursor: grab;
+    border: 1px solid black;
+}
+.ficha-naranja:hover{
+    background-color: #dd5800;
+
+}
+.s{
+    /* align-self: flex-end; */
+    width: 30%;
+    height: 30%;
+}
+.l{
+    width: 60%;
+    height: 60%;
+}
+.xl{
+    width: 85%;
+    height: 85%;
+}
+.tablero{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin:3rem;
+    padding: 15px;
+    border: 2px solid black;
+}
+.casilla-tablero{
+    width: 200px;
+    height: 200px;
+    border: 2px solid black;
+    background-color: rgba(255, 255, 255, 0.623);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.casilla-tablero:hover{
+    background-color:#f3f1f1;
+}
+
