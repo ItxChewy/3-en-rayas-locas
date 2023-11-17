@@ -4,6 +4,7 @@ let fichasAzules;
 let fichasNaranjas;
 let turnoActual = 0;
 let datoTiempo; 
+let click = 0;
 
 window.addEventListener("load", inicio);
 
@@ -32,52 +33,16 @@ function drop(ev) {
 
 }
 
-
-function quitarDrag() {
-  if (turnoActual % 2 === 0) {
-    for (let i = 0; i < fichasAzules.length; i++) {
-      fichasAzules[i].draggable = true;
-    }
-    for (let i = 0; i < fichasNaranjas.length; i++) {
-      fichasNaranjas[i].draggable = false;
-    }
-  } else {
-    for (let i = 0; i < fichasAzules.length; i++) {
-      fichasAzules[i].draggable = false;
-    }
-    for (let i = 0; i < fichasNaranjas.length; i++) {
-      fichasNaranjas[i].draggable = true;
-    }
-  }
-}
-
 function turnos() {
   if (turnoActual % 2 != 0) {
     document.getElementById("turno").textContent = "AZUL";
   } else {
     document.getElementById("turno").textContent = "NARANJA";
   }
-  //quitarDrag();
   turnoActual++;
 }
 
-function temporizador(tiempoParseado) {
-  setInterval(() => {
-    if (tiempoParseado < 0) {
-      turnos();
-      tiempoParseado = 7;
-    }
-    if (tiempoParseado <= 5) {
-      datoTiempo.style.color = "red";
-      datoTiempo.style.fontWeight = "bold";
-    } else {
-      datoTiempo.style.color = "black";
-      datoTiempo.style.fontWeight = "normal";
-    }
-    datoTiempo.textContent = tiempoParseado;
-    tiempoParseado--;
-  }, 1000);
-}
+
 
 function inicio() {
   cuerpo = document.body;
@@ -89,11 +54,38 @@ function inicio() {
   const tiempoParseado = parseInt(datoTiempo.textContent);
   document.getElementById("btn-frenesi").addEventListener("click", activarModoFrenesi);
 
-  temporizador(tiempoParseado);
+  function temporizador(tiempoParseado) {
+      setInterval(() => {
+        if (tiempoParseado < 0) {
+          turnos();
+          if(click== 0){
+            tiempoParseado = 10;
+          }else{
+            tiempoParseado = 5;
+          }
+        
+        }
+        if (tiempoParseado <= 5) {
+          datoTiempo.style.color = "red";
+          datoTiempo.style.fontWeight = "bold";
+        } else {
+          datoTiempo.style.color = "black";
+          datoTiempo.style.fontWeight = "normal";
+        }
+        datoTiempo.textContent = tiempoParseado;
+        tiempoParseado--;
+      }, 1000);
+    
+  }
+temporizador(tiempoParseado);
+ 
+  
 }
+
 
 function activarModoFrenesi() {
   cuerpo.classList.add("animacionBody");
   caja_boton.style.display = "none";
+  click++;
 }
 
