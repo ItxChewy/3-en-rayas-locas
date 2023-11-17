@@ -14,7 +14,8 @@ function hayJugadores(){
         document.getElementById("cont-formulario").classList.add("inactiva");
         return false;
     } else {
-        
+        localStorage.setItem('J1',document.getElementById("J1").value);
+        localStorage.setItem('J2',document.getElementById("J2").value);
         return true;
     }
 }

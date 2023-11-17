@@ -1,9 +1,13 @@
-let cuerpo;  // Declarar la variable en un ámbito más amplio
+let cuerpo;
 let caja_boton;
+let turnoAzul = false;
+let turnoNaranja = false;
+
 window.addEventListener("load", inicio);
+
 function allowDrop(ev) {
     ev.preventDefault();
-    console.log("DragOver")
+    console.log("DragOver");
 }
 
 function drag(ev) {
@@ -17,35 +21,58 @@ function drop(ev) {
 
 function inicio() {
     cuerpo = document.body;
-    caja_boton = document.getElementsByClassName("cont-frenesi");  // Asignar el valor en la función inicio
-    document.getElementById("btn-frenesi").addEventListener("click", modoFrenesi);
+    caja_boton = document.getElementsByClassName("cont-frenesi");  
+    var fichasAzules = document.getElementsByClassName("ficha-azul");
+    var fichasNaranjas = document.getElementsByClassName("ficha-naranja");
+    var numeroAleatorio = Math.round(Math.random());
     const datoTiempo = document.getElementById("tiempo");
-        const tiempoParseado = parseInt(datoTiempo.textContent);
-        console.log('El numero de tiempo es: '+tiempoParseado)
+    const tiempoParseado = parseInt(datoTiempo.textContent);
+    
+    // Llamada inicial a turnos para establecer el primer turno y draggable
+    turnos();
 
-        function temporizador(tiempoParseado){
-            setInterval(()=> {
-                    if(tiempoParseado < 0){
-                        tiempoParseado = 15;
-                    }
-                    if(tiempoParseado <= 5){
-                        datoTiempo.style.color = 'red';
-                        datoTiempo.style.fontWeight = 'bold';
-                    } else {
-                        datoTiempo.style.color = 'black';
-                        datoTiempo.style.fontWeight = 'normal';
-                    }
-                    datoTiempo.textContent = tiempoParseado
-                    tiempoParseado--;
-                },1000);
+    document.getElementById("btn-frenesi").addEventListener("click", modoFrenesi);
+
+    function quitarDrag(fichas, turno) {
+        for (let i = 0; i < 9; i++) {
+            fichas[i].setAttribute("draggable", turno ? "true" : "false");
+        }
+    }
+
+    function turnos() {
+        if (numeroAleatorio === 0) {
+            turnoAzul = true;
+        } else {
+            turnoNaranja = true;
         }
 
-        temporizador(tiempoParseado);
+        quitarDrag(fichasAzules, turnoAzul);
+        quitarDrag(fichasNaranjas, turnoNaranja);
+        document.getElementById("turno").textContent = numeroAleatorio;
+    }
+
+    function temporizador(tiempoParseado) {
+        setInterval(() => {
+            if (tiempoParseado < 0) {
+                tiempoParseado = 15;
+            }
+            if (tiempoParseado <= 5) {
+                datoTiempo.style.color = 'red';
+                datoTiempo.style.fontWeight = 'bold';
+            } else {
+                datoTiempo.style.color = 'black';
+                datoTiempo.style.fontWeight = 'normal';
+            }
+            datoTiempo.textContent = tiempoParseado;
+            tiempoParseado--;
+        }, 1000);
+    }
+
+    temporizador(tiempoParseado);
 }
 
 function modoFrenesi() {
     cuerpo.classList.add("animacionBody");  
-    caja_boton[0].style.display="none";
+    caja_boton[0].style.display = "none";
 }
-
 
