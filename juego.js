@@ -8,6 +8,7 @@ let click = 0;
 let tiempoReseteado = false;
 const casillaTablero = document.getElementsByClassName("casilla-tablero");
 
+
 window.addEventListener("load", inicio);
 
 function inicio() {
@@ -16,8 +17,15 @@ function inicio() {
   fichasAzules = document.getElementsByClassName("ficha-azul");
   fichasNaranjas = document.getElementsByClassName("ficha-naranja");
   datoTiempo = document.getElementById("tiempo"); 
+
+
+  btn_revancha = document.getElementById("revancha");
+  btn_inicio = document.getElementById("inicio");
+
   const tiempoParseado = parseInt(datoTiempo.textContent);
   document.getElementById("btn-frenesi").addEventListener("click", activarModoFrenesi);
+  document.getElementById("inicio").addEventListener("click", volverInicio);
+  document.getElementById("revancha").addEventListener("click", jugarRevancha);
   function temporizador(tiempoParseado) {
       setInterval(() => {
         if (tiempoParseado < 0 || tiempoReseteado) {
@@ -60,7 +68,12 @@ function comprobarFichas(data, ev){
       if(!ev.target.hasChildNodes()){
         ev.target.appendChild(document.getElementById(data));
       } else {
-        if(ev.target.firstChild.classList.contains('l') || ev.target.firstChild.classList.contains('s')){
+        if(ev.target.classList.contains('ficha-azul') || ev.target.classList.contains('ficha-naranja')){
+          let parent = ev.target.parentNode;
+          parent.removeChild(parent.firstChild);
+          parent.appendChild(document.getElementById(data));
+        }
+        else if(ev.target.firstChild.classList.contains('l') || ev.target.firstChild.classList.contains('s')){
           ev.target.removeChild(ev.target.firstChild);
           ev.target.appendChild(document.getElementById(data));
         } else {
@@ -73,10 +86,16 @@ function comprobarFichas(data, ev){
       if(!ev.target.hasChildNodes()){
         ev.target.appendChild(document.getElementById(data));
       } else {
+        if(ev.target.classList.contains('ficha-azul') || ev.target.classList.contains('ficha-naranja')){
+          let parent = ev.target.parentNode;
+          parent.removeChild(parent.firstChild);
+          parent.appendChild(document.getElementById(data));
+        }else
         if(ev.target.firstChild.classList.contains('s')){
           ev.target.removeChild(ev.target.firstChild);
           ev.target.appendChild(document.getElementById(data));
-        } else {
+        } 
+         else {
           alert("No puedes poner aqui")
         }
       }
@@ -92,8 +111,9 @@ function comprobarFichas(data, ev){
 
 function drop(ev) {
     //Data es la ficha que cogemos (id) --> la bolita
+    console.log(ev.target.classList)
     var data = ev.dataTransfer.getData("text");
-    if(ev.target.classList.contains('casilla-tablero')){
+    if(ev.target.classList.contains('casilla-tablero')|| ev.target.classList.contains('ficha-naranja') || ev.target.classList.contains('ficha-azul')){
       // if(!ev.target.hasChildNodes()){
         if((data.charAt(0) == 'a') && turnoActual%2==0){
          comprobarFichas(data, ev);
@@ -109,10 +129,7 @@ function drop(ev) {
           console.log("Cambia de turno en naranja")
       }
       // }
-      comprobarDiagonal();
-      comprobarVertical();
-      comprobarHorizontal();
-      comprobarTableroLleno();
+     comprobaciones();
     }
 }
 
@@ -125,6 +142,14 @@ function turnos() {
   turnoActual++;
 }
 
+function comprobaciones(){
+  comprobarDiagonal();
+  comprobarVertical();
+  comprobarHorizontal();
+  comprobarTableroLleno();
+  
+}
+
 function comprobarTableroLleno(){
   var contador = 0;
   for(let i =0;i<casillaTablero.length;i++){
@@ -134,52 +159,46 @@ function comprobarTableroLleno(){
   }
   if(contador==9){
     alert("Tablero lleno");
+    document.getElementById("alerta").classList.remove("inactiva");
   }else{
     contador=0;
   }
 }
 
+
 function comprobarHorizontal() {
   let victoria = false;
-  if(casillaTablero[0].hasChildNodes() && casillaTablero[1].hasChildNodes() && casillaTablero[2].hasChildNodes()) {
-    if ((casillaTablero[0].firstChild.classList.contains("ficha-azul") && casillaTablero[1].firstChild.classList.contains("ficha-azul") && casillaTablero[2].firstChild.classList.contains("ficha-azul")) || (casillaTablero[0].firstChild.classList.contains("ficha-naranja") && casillaTablero[1].firstChild.classList.contains("ficha-naranja") && casillaTablero[2].firstChild.classList.contains("ficha-naranja"))){
-      victoria = true;
-    }
-  }
-  if(casillaTablero[3].hasChildNodes() && casillaTablero[4].hasChildNodes() && casillaTablero[5].hasChildNodes()) {
-    if ((casillaTablero[3].firstChild.classList.contains("ficha-azul") && casillaTablero[4].firstChild.classList.contains("ficha-azul") && casillaTablero[5].firstChild.classList.contains("ficha-azul")) || (casillaTablero[3].firstChild.classList.contains("ficha-naranja") && casillaTablero[4].firstChild.classList.contains("ficha-naranja") && casillaTablero[5].firstChild.classList.contains("ficha-naranja"))){
-      victoria = true;
-    }
-  }
-  if(casillaTablero[6].hasChildNodes() && casillaTablero[7].hasChildNodes() && casillaTablero[8].hasChildNodes()) {
-    if ((casillaTablero[6].firstChild.classList.contains("ficha-azul") && casillaTablero[7].firstChild.classList.contains("ficha-azul") && casillaTablero[8].firstChild.classList.contains("ficha-azul")) || (casillaTablero[6].firstChild.classList.contains("ficha-naranja") && casillaTablero[7].firstChild.classList.contains("ficha-naranja") && casillaTablero[8].firstChild.classList.contains("ficha-naranja"))){
-      victoria = true;
+    
+  for(let i = 0; i < casillaTablero.length; i = i + 3){
+    if(casillaTablero[i].hasChildNodes() && casillaTablero[i+1].hasChildNodes() && casillaTablero[i+2].hasChildNodes()) {
+      if ((casillaTablero[i].firstChild.classList.contains("ficha-azul") && casillaTablero[i+1].firstChild.classList.contains("ficha-azul") && casillaTablero[i+2].firstChild.classList.contains("ficha-azul")) 
+      || (casillaTablero[i].firstChild.classList.contains("ficha-naranja") && casillaTablero[i+1].firstChild.classList.contains("ficha-naranja") && casillaTablero[i+2].firstChild.classList.contains("ficha-naranja"))){
+        victoria = true;
+      }
     }
   }
   if (victoria) {
     alert("Victoria");
+    document.getElementById("alerta").classList.remove("inactiva");
+   
+    
+    /*document.getElementById("cont-juego").classList.add("inactiva");*/
   }
 }
 
 function comprobarVertical(){
   let victoria = false;
-  if(casillaTablero[0].hasChildNodes() && casillaTablero[3].hasChildNodes() && casillaTablero[6].hasChildNodes()) {
-    if ((casillaTablero[0].firstChild.classList.contains("ficha-azul") && casillaTablero[3].firstChild.classList.contains("ficha-azul") && casillaTablero[6].firstChild.classList.contains("ficha-azul")) || (casillaTablero[0].firstChild.classList.contains("ficha-naranja") && casillaTablero[3].firstChild.classList.contains("ficha-naranja") && casillaTablero[6].firstChild.classList.contains("ficha-naranja"))){
-      victoria = true;
-    }
-  }
-  if(casillaTablero[1].hasChildNodes() && casillaTablero[4].hasChildNodes() && casillaTablero[7].hasChildNodes()) {
-    if ((casillaTablero[1].firstChild.classList.contains("ficha-azul") && casillaTablero[4].firstChild.classList.contains("ficha-azul") && casillaTablero[7].firstChild.classList.contains("ficha-azul")) || (casillaTablero[1].firstChild.classList.contains("ficha-naranja") && casillaTablero[4].firstChild.classList.contains("ficha-naranja") && casillaTablero[7].firstChild.classList.contains("ficha-naranja"))){
-      victoria = true;
-    }
-  }
-  if(casillaTablero[2].hasChildNodes() && casillaTablero[5].hasChildNodes() && casillaTablero[8].hasChildNodes()) {
-    if ((casillaTablero[2].firstChild.classList.contains("ficha-azul") && casillaTablero[5].firstChild.classList.contains("ficha-azul") && casillaTablero[8].firstChild.classList.contains("ficha-azul")) || (casillaTablero[2].firstChild.classList.contains("ficha-naranja") && casillaTablero[5].firstChild.classList.contains("ficha-naranja") && casillaTablero[8].firstChild.classList.contains("ficha-naranja"))){
-      victoria = true;
+  for(let i = 0; i < 3; i ++){
+    if(casillaTablero[i].hasChildNodes() && casillaTablero[i+3].hasChildNodes() && casillaTablero[i+6].hasChildNodes()) {
+      if ((casillaTablero[i].firstChild.classList.contains("ficha-azul") && casillaTablero[i+3].firstChild.classList.contains("ficha-azul") && casillaTablero[i+6].firstChild.classList.contains("ficha-azul")) 
+      || (casillaTablero[i].firstChild.classList.contains("ficha-naranja") && casillaTablero[i+3].firstChild.classList.contains("ficha-naranja") && casillaTablero[i+6].firstChild.classList.contains("ficha-naranja"))){
+        victoria = true;
+      }
     }
   }
   if (victoria) {
     alert("Victoria");
+    document.getElementById("alerta").classList.remove("inactiva");
   }
 }
 
@@ -197,12 +216,22 @@ function comprobarDiagonal(){
   }
   if (victoria) {
     alert("Victoria");
+    document.getElementById("alerta").classList.remove("inactiva");
   }
 }
 
+  function volverInicio(){
+    window.location.href='index1-1.html';
+  }
+
+  function jugarRevancha(){
+    location.reload();
+  }
 
 function activarModoFrenesi() {
   cuerpo.classList.add("animacionBody");
   caja_boton.style.display = "none";
   click++;
 }
+
+
