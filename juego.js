@@ -6,6 +6,9 @@ let turnoActual = 0;
 let datoTiempo; 
 let click = 0;
 let tiempoReseteado = false;
+let risaFrenesi;
+let alarmaReloj;
+let victoriaAlert;
 const casillaTablero = document.getElementsByClassName("casilla-tablero");
 
 
@@ -17,6 +20,9 @@ function inicio() {
   fichasAzules = document.getElementsByClassName("ficha-azul");
   fichasNaranjas = document.getElementsByClassName("ficha-naranja");
   datoTiempo = document.getElementById("tiempo"); 
+  risaFrenesi = document.getElementById('risaFrenesi');
+  alarmaReloj = document.getElementById("alarmaReloj");
+  victoriaAlert = document.getElementById("victoria");
 
 
   btn_revancha = document.getElementById("revancha");
@@ -37,15 +43,21 @@ function inicio() {
             tiempoParseado = 10;
           }else{
             tiempoParseado = 5;
+            
           }  
           
         }
         if (tiempoParseado <= 5) {
           datoTiempo.style.color = "red";
           datoTiempo.style.fontWeight = "bold";
+            if(tiempoParseado <= 3){ //miguel hago esto por que sino el audio queda mal y no encuentro uno de 5 s
+              alarmaReloj.play();
+            }
+          
         } else {
           datoTiempo.style.color = "black";
           datoTiempo.style.fontWeight = "normal";
+          alarmaReloj.pause();
         }
         datoTiempo.textContent = tiempoParseado;
         tiempoParseado--;
@@ -69,10 +81,11 @@ function comprobarFichas(data, ev){
         ev.target.appendChild(document.getElementById(data));
       } else {
         if(ev.target.classList.contains('ficha-azul') || ev.target.classList.contains('ficha-naranja')){
-          let parent = ev.target.parentNode;
-          parent.removeChild(parent.firstChild);
-          parent.appendChild(document.getElementById(data));
-        }
+          if(ev.target.classList.contains('s') ||ev.target.classList.contains('l') ){
+            let parent = ev.target.parentNode;
+            parent.removeChild(parent.firstChild);
+            parent.appendChild(document.getElementById(data));
+          }
         else if(ev.target.firstChild.classList.contains('l') || ev.target.firstChild.classList.contains('s')){
           ev.target.removeChild(ev.target.firstChild);
           ev.target.appendChild(document.getElementById(data));
@@ -80,6 +93,7 @@ function comprobarFichas(data, ev){
           alert("No puedes poner aqui")
         }
       }
+    }
       console.log(data);
       break;
     case 'l':
@@ -87,9 +101,12 @@ function comprobarFichas(data, ev){
         ev.target.appendChild(document.getElementById(data));
       } else {
         if(ev.target.classList.contains('ficha-azul') || ev.target.classList.contains('ficha-naranja')){
-          let parent = ev.target.parentNode;
-          parent.removeChild(parent.firstChild);
-          parent.appendChild(document.getElementById(data));
+          if(ev.target.classList.contains('s')){
+            let parent = ev.target.parentNode;
+            parent.removeChild(parent.firstChild);
+            parent.appendChild(document.getElementById(data));
+          }
+         
         }else
         if(ev.target.firstChild.classList.contains('s')){
           ev.target.removeChild(ev.target.firstChild);
@@ -178,11 +195,10 @@ function comprobarHorizontal() {
     }
   }
   if (victoria) {
+    victoriaAlert.play();
     alert("Victoria");
     document.getElementById("alerta").classList.remove("inactiva");
-   
-    
-    /*document.getElementById("cont-juego").classList.add("inactiva");*/
+    document.getElementById("cont-juego").classList.add("inactiva");
   }
 }
 
@@ -197,8 +213,10 @@ function comprobarVertical(){
     }
   }
   if (victoria) {
+    victoriaAlert.play();
     alert("Victoria");
     document.getElementById("alerta").classList.remove("inactiva");
+    document.getElementById("cont-juego").classList.add("inactiva");
   }
 }
 
@@ -215,8 +233,10 @@ function comprobarDiagonal(){
     }
   }
   if (victoria) {
+    victoriaAlert.play();
     alert("Victoria");
     document.getElementById("alerta").classList.remove("inactiva");
+    document.getElementById("cont-juego").classList.add("inactiva");
   }
 }
 
@@ -230,6 +250,7 @@ function comprobarDiagonal(){
 
 function activarModoFrenesi() {
   cuerpo.classList.add("animacionBody");
+  risaFrenesi.play();
   caja_boton.style.display = "none";
   click++;
 }
