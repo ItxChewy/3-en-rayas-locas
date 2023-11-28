@@ -221,6 +221,7 @@ body{
   #micro-alerta input:hover{
     background-color: limegreen;
   }
+
   .inactiva{
     display:none;
 }
