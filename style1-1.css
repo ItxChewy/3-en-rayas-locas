@@ -1,7 +1,7 @@
 body {
-    overflow: hidden;
-    margin: 0;
-    height: 100%;  
+  overflow: hidden;
+  margin: 0;
+  height: 100%;  
 }
 
 #cont-formulario {
@@ -10,7 +10,7 @@ flex-direction: column;
 align-items: center;
 background-color: #fceed6;
 height: 100vh;
-background-image: url(https://static.vecteezy.com/system/resources/previews/009/877/673/non_2x/pixel-art-sky-background-with-clouds-cloudy-blue-sky-for-8bit-game-on-white-background-vector.jpg);
+background-image: url(img/cielo-libre.jpg);
 background-position: center;
 background-size: cover;
 }
@@ -98,41 +98,51 @@ animation: movimientosLocos 1s infinite;
 }
 
 .alerta {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    box-shadow: 0px 21px 26px 11px rgba(3, 3, 3, 0.452);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: snow;
-    width: 25%;
-    border-radius: 5px;
-    height: 25%;
-  }
-  #micro-alerta {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 30px;
-    background-color: snow;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0px 21px 26px 11px rgba(3, 3, 3, 0.452);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: snow;
+  width: 25%;
+  border-radius: 5px;
+  height: 25%;
+}
+#micro-alerta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  background-color: snow;
 }
 #micro-alerta input {
-    box-sizing: border-box;
-    border-width: 0 0 10px 0; 
-    width: 50%;
-    padding: 10px;
-    border: 1px solid black;
-    text-align: center;
-    align-self: center;
-    background-color: #ffff;
-    border-radius: 5px;
-  }
-  #micro-alerta input:hover{
-    background-color: limegreen;
-  }
-  .inactiva{
-    display:none;
+  box-sizing: border-box;
+  border-width: 0 0 10px 0; 
+  width: 50%;
+  padding: 10px;
+  border: 1px solid black;
+  text-align: center;
+  align-self: center;
+  background-color: #ffff;
+  border-radius: 5px;
+}
+#micro-alerta input:hover{
+  background-color: limegreen;
+}
+.inactiva{
+  display:none;
+}
+
+@media only screen and (max-width: 425px) {
+h2{
+  text-align: center;
+}
+
+#formValidado{
+  width: 300px;
+}
 }

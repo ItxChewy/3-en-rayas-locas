@@ -8,7 +8,7 @@ html,body {
 
 body{
     overflow: hidden;
-    background-image: url(https://static.vecteezy.com/system/resources/previews/009/877/673/non_2x/pixel-art-sky-background-with-clouds-cloudy-blue-sky-for-8bit-game-on-white-background-vector.jpg);
+    background-image: url(img/cielo-libre.jpg);
     background-position: center;
     background-size: cover;
     margin: 0 auto;
@@ -28,6 +28,10 @@ body{
     width: 100%;
     text-align: center;
     padding: 10px; /* Igual genera margen arriba, checkear por si acaso al final esto */
+}
+
+.cont-turno >p{
+  color:white;
 }
 
 .cont-timer{
@@ -178,7 +182,7 @@ body{
     }
     100% {
         transform: rotateY(360deg);
-        background-image: url(https://img.freepik.com/vector-gratis/ilustracion-juego-vista-cueva-fondo-infierno-lava_107791-19618.jpg);
+        background-image: url(img/ascuas.jpg);
         background-size: cover;
         background-position:center;
     }
@@ -207,21 +211,84 @@ body{
     gap: 30px;
     background-color: snow;
 }
-#micro-alerta input {
-    box-sizing: border-box;
-    border-width: 0 0 10px 0; 
-    width: 50%;
+
+  #inicio, #revancha {
+    width: 150px;
     padding: 10px;
-    border: 1px solid black;
-    text-align: center;
-    align-self: center;
-    background-color: #ffff;
-    border-radius: 5px;
+    box-sizing: border-box;
+    transition: 0.3s ease;
   }
-  #micro-alerta input:hover{
-    background-color: limegreen;
+
+  #inicio:hover{
+    background-color: #09f;
+    color: white;
+    cursor: pointer;
+  }
+
+  #revancha:hover{
+    background-color: green;
+    color: white;
+    cursor: pointer;
   }
 
   .inactiva{
     display:none;
+}
+
+@media (max-width: 768px) {
+    .cont-turno{
+        padding: 15px;
+    }
+
+    .cont-timer{
+        margin-bottom: 10px;
+    }
+    .cont-tablero{
+        width: 768px;
+        display: flex;
+        flex-direction: column;
+    }
+     .tablero{
+        /* width: 400px;
+        height: 400px; */
+        border: 0;
+        padding: 0;
+    } 
+    .casilla-tablero{
+        width: 90px;
+        height: 90px;
+        padding: 0;
+    }
+    .cont-fichas-azules,.cont-fichas-naranjas{
+        display: flex;
+        flex-wrap: wrap;
+        width: 150px;
+        height: 150px;
+        padding: 5px;
+        gap: 0px;
+    }
+    .s, .l, .xl{
+        width: 30px;
+        height: 30px;
+    }
+    .ficha-azul, .ficha-naranja{
+        box-shadow: none;
+    }
+
+    .cont-frenesi{
+       padding: 10px;
+    }
+
+    #btn-frenesi {
+        width: 50px;
+        height: 50px;
+    }
+
+    #micro-alerta p{
+        text-align: center;
+    }
+
+    #inicio, #revancha{
+        width: 100px;
+    }
 }
