@@ -12,6 +12,7 @@ let victoriaAlert;
 const casillaTablero = document.getElementsByClassName("casilla-tablero");
 let partidaAcabada = false;
 let ranking;
+let caja_turno;
 
 window.addEventListener("load", inicio);
 
@@ -25,6 +26,7 @@ function inicio() {
   alarmaReloj = document.getElementById("alarmaReloj");
   victoriaAlert = document.getElementById("victoria");
   ranking = document.getElementById("ranking");
+  caja_turno = document.getElementsByClassName("cont-turno");
 
 
   btn_revancha = document.getElementById("revancha");
@@ -171,8 +173,10 @@ function drop(ev) {
 function turnos() {
   if (turnoActual % 2 != 0) {
     document.getElementById("turno").textContent = "AZUL";
+    caja_turno[0].style.backgroundColor = "#09f";
   } else {
     document.getElementById("turno").textContent = "NARANJA";
+    caja_turno[0].style.backgroundColor = "orange";
   }
   turnoActual++;
 }
