@@ -13,6 +13,7 @@ const casillaTablero = document.getElementsByClassName("casilla-tablero");
 let partidaAcabada = false;
 let ranking;
 let caja_turno;
+let contenedorNaranja;
 
 window.addEventListener("load", inicio);
 
@@ -27,10 +28,13 @@ function inicio() {
   victoriaAlert = document.getElementById("victoria");
   ranking = document.getElementById("ranking");
   caja_turno = document.getElementsByClassName("cont-turno");
-
+  contenedorNaranja = document.getElementsByClassName("cont-fichas-naranjas");
 
   btn_revancha = document.getElementById("revancha");
   btn_inicio = document.getElementById("inicio");
+
+
+  
 
   const tiempoParseado = parseInt(datoTiempo.textContent);
   document.getElementById("btn-frenesi").addEventListener("click", activarModoFrenesi);
@@ -42,9 +46,9 @@ function inicio() {
         if(!partidaAcabada){
           if (tiempoParseado < 0 || tiempoReseteado) {
             tiempoReseteado = false;
-            console.log(tiempoParseado)
+            // console.log(tiempoParseado)
             turnos();
-            console.log("Cambia de turno en temporizador")
+            // console.log("Cambia de turno en temporizador")
             if(click== 0 ){
               tiempoParseado = 10;
             }else{
@@ -85,52 +89,92 @@ function drag(ev) {
 }
 
 function comprobarFichas(data, ev) {
+  let parent = ev.target.parentNode;
   switch (data[data.length - 1]) {
     case 'x':
-      if (!ev.target.hasChildNodes()) {
+      console.log("ev.target es: ")
+
+      console.log(ev.target.classList)
+
+      if (ev.target.classList.contains('casilla-tablero')) {
+        console.log(parent)
+        console.log("Tiene hijos? ")
+       
         var ficha = document.getElementById(data);
-        ev.target.appendChild(ficha);
+        if(ev.target.hasChildNodes()){
+          if(ev.target.firstChild.classList.contains('xl')){
+            alert("errorrr")
+          } else if(ev.target.firstChild.classList.contains('l') || ev.target.firstChild.classList.contains('s')) {
+            ev.target.removeChild(ev.target.firstChild);
+            ev.target.appendChild(ficha);
+            console.log("TIene hijos")
+          } 
+        } else {
+          ev.target.appendChild(ficha);
+        }
         ficha.draggable = false; // Desactiva la capacidad de arrastre
       } else {
         if (ev.target.classList.contains('ficha-azul') || ev.target.classList.contains('ficha-naranja')) {
           if (ev.target.classList.contains('l')) {
-            let parent = ev.target.parentNode;
+            let parent = ev.target.parentNode; //MIRAR AQUI EL ERROR, LO SOLUCIONAMOS DESPUES DEL RECREO PERO ESTÁ AQUÍ 
+            console.log("El padre es: " + parent)
             parent.removeChild(parent.firstChild);
-            parent.appendChild(document.getElementById(data));
+          // parent.appendChild(document.getElementById(data));
+          parent.appendChild(document.getElementById(data));
+
+            // parent.removeChild(parent.firstChild);
+            // parent.appendChild(document.getElementById(data));
             document.getElementById(data).draggable = false; // Desactiva la capacidad de arrastre
-          }
-        } else if (ev.target.firstChild.classList.contains('s')) {
-          ev.target.removeChild(ev.target.firstChild);
-          ev.target.appendChild(document.getElementById(data));
+          } else if (ev.target.classList.contains('s')) {
+          let parent = ev.target.parentNode; //MIRAR AQUI EL ERROR, LO SOLUCIONAMOS DESPUES DEL RECREO PERO ESTÁ AQUÍ 
+
+          parent.removeChild(parent.firstChild);
+          // parent.appendChild(document.getElementById(data));
+          parent.appendChild(document.getElementById(data));
           document.getElementById(data).draggable = false; // Desactiva la capacidad de arrastre
         } else {
           alert("No puedes poner aquí");
         }
       }
-      console.log(data);
+    }
+      // console.log(data);
       break;
     case 'l':
-      if (!ev.target.hasChildNodes()) {
+      console.log("ev.target es: ")
+
+      console.log(ev.target.classList)
+
+      if (ev.target.classList.contains('casilla-tablero')) {
+        console.log(parent)
+        console.log("Tiene hijos? ")
+       
         var ficha = document.getElementById(data);
-        ev.target.appendChild(ficha);
+        if(ev.target.hasChildNodes()){
+          if(ev.target.firstChild.classList.contains('l')){
+            alert("errorrr")
+          } else if(ev.target.firstChild.classList.contains('s')) {
+            ev.target.removeChild(ev.target.firstChild);
+            ev.target.appendChild(ficha);
+            console.log("TIene hijos")
+          } 
+        } else {
+          ev.target.appendChild(ficha);
+        }
         ficha.draggable = false; // Desactiva la capacidad de arrastre
       } else {
         if (ev.target.classList.contains('ficha-azul') || ev.target.classList.contains('ficha-naranja')) {
-          if (ev.target.classList.contains('s') || ev.target.classList.contains('l')) {
-            let parent = ev.target.parentNode;
-            parent.removeChild(parent.firstChild);
-            parent.appendChild(document.getElementById(data));
-            document.getElementById(data).draggable = false; // Desactiva la capacidad de arrastre
-          } else if (ev.target.firstChild.classList.contains('l') || ev.target.firstChild.classList.contains('s')) {
-            ev.target.removeChild(ev.target.firstChild);
-            ev.target.appendChild(document.getElementById(data));
-            document.getElementById(data).draggable = false; // Desactiva la capacidad de arrastre
-          } else {
-            alert("No puedes poner aquí");
-          }
+         if (ev.target.classList.contains('s')) {
+          let parent = ev.target.parentNode; //MIRAR AQUI EL ERROR, LO SOLUCIONAMOS DESPUES DEL RECREO PERO ESTÁ AQUÍ 
+          parent.removeChild(parent.firstChild);
+          // parent.appendChild(document.getElementById(data));
+          parent.appendChild(document.getElementById(data));
+          document.getElementById(data).draggable = false; // Desactiva la capacidad de arrastre
+        } else {
+          alert("No puedes poner aquí");
         }
       }
-      console.log(data);
+    }
+      // console.log(data);
       break;
     case 's':
       if (!ev.target.hasChildNodes()) {
@@ -138,7 +182,7 @@ function comprobarFichas(data, ev) {
         ev.target.appendChild(ficha);
         ficha.draggable = false; // Desactiva la capacidad de arrastre
       }
-      console.log(data);
+      // console.log(data);
       break;
     default:
       console.error("Tipo de ficha no reconocido");
@@ -151,22 +195,18 @@ function drop(ev) {
     console.log(ev.target.classList)
     var data = ev.dataTransfer.getData("text");
     if(ev.target.classList.contains('casilla-tablero')|| ev.target.classList.contains('ficha-naranja') || ev.target.classList.contains('ficha-azul')){
-      // if(!ev.target.hasChildNodes()){
         if((data.charAt(0) == 'a') && turnoActual%2==0){
          comprobarFichas(data, ev);
-          // ev.target.appendChild(document.getElementById(data));
           tiempoReseteado = true;
-          console.log("El primer hijo es: "+ev.target.firstChild.id)
-          console.log("Cambia de turno en azul")
+
       }
       if((data.charAt(0) == 'n') && turnoActual%2==1){
         comprobarFichas(data, ev);
           tiempoReseteado = true;
-          console.log("El primer hijo es: "+ev.target.firstChild.id)
-          console.log("Cambia de turno en naranja")
       }
-      // }
-     comprobaciones();
+      comprobarTurno();
+      quitarDragTablero();
+      comprobaciones();
     }
 }
 
@@ -181,27 +221,45 @@ function turnos() {
   turnoActual++;
 }
 
+function comprobarTurno(){
+  if(turnoActual >=3){
+    document.getElementById("cont-frenesi").classList.remove("inactiva");
+  }
+}
 function comprobaciones(){
   comprobarDiagonal();
   comprobarVertical();
   comprobarHorizontal();
   comprobarTableroLleno();
   
+  
 }
 
 function comprobarTableroLleno(){
   var contador = 0;
+  var xl = 0;
+  var s = 0;
+
   for(let i =0;i<casillaTablero.length;i++){
       if(casillaTablero[i].hasChildNodes()){
         contador++;
       }
+      if(casillaTablero[i].firstChild.classList[1]=="xl"){
+        xl++;
+      }
+      if(casillaTablero[i].firstChild.classList[1]=="s"){
+        s++;
+      }
   }
-  if(contador==9){
-    alert("Tablero lleno");
+  if(contador==9 && xl == 6 && s == 0){
+    // alert("Tablero lleno");
     document.getElementById("alerta").classList.remove("inactiva");
+    document.getElementById("alerta").textContent = "TABLERO LLENO, EMPATE"
   }else{
     contador=0;
   }
+  quitarDrag();
+
 }
 
 
@@ -224,11 +282,10 @@ function comprobarHorizontal() {
   if (victoria) {
     partidaAcabada = true;
     sacarGanador(ganador);
+    quitarDrag();
 
     victoriaAlert.play();
-   // alert("Victoria");
     document.getElementById("alerta").classList.remove("inactiva");
-    //document.getElementById("cont-juego").classList.add("inactiva");
   }
 }
 
@@ -251,6 +308,7 @@ function comprobarVertical(){
   if (victoria) {
     partidaAcabada = true;
     sacarGanador(ganador);
+    quitarDrag();
 
     victoriaAlert.play();
    //alert("Victoria");
@@ -260,6 +318,15 @@ function comprobarVertical(){
 }
 let ganador = "";
 var arrayGanadores = [];
+
+function quitarDragTablero(){
+  for(let i = 0; i < casillaTablero.length; i++){
+    if(casillaTablero[i].hasChildNodes()){
+      casillaTablero[i].firstChild.style.pointerEvents = "none";
+    }
+  }
+}
+
 function comprobarDiagonal(){
   let victoria = false;
   
@@ -286,17 +353,34 @@ function comprobarDiagonal(){
   if (victoria) {
     partidaAcabada = true;
     sacarGanador(ganador);
+    quitarDrag();
     victoriaAlert.play();
     //alert("Victoria");
     document.getElementById("alerta").classList.remove("inactiva");
     //document.getElementById("cont-juego").classList.add("inactiva");
   }
 }
+  function quitarDrag(){
+    if (partidaAcabada) {
+      for (let i = 0; i < fichasAzules.length; i++) {
+        fichasAzules[i].style.pointerEvents = "none";
+       
+      }
+  
+      for (let i = 0; i < fichasNaranjas.length; i++) {
+        fichasNaranjas[i].style.pointerEvents = "none";
+        
+
+      }
+    }
+    console.log(fichasAzules)
+  }
 
   function sacarGanador(ganador){
     var strGanador = "";
     if(ganador == "azul"){
       var nombreGanador = document.createElement('p');
+      nombreGanador.setAttribute("class","ganador");
       strGanador = localStorage.getItem('J1');
       nombreGanador.textContent = strGanador;
       arrayGanadores.push(nombreGanador)
@@ -304,6 +388,7 @@ function comprobarDiagonal(){
       //alert(`El ganador es ${localStorage.getItem('J1')}`)
     } else {
       var nombreGanador = document.createElement('p');
+      nombreGanador.setAttribute("class","ganador");
       strGanador = localStorage.getItem('J2');
       nombreGanador.textContent = strGanador;
       arrayGanadores.push(nombreGanador)

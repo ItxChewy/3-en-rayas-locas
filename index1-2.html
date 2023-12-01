@@ -20,15 +20,15 @@
 
         <div class="cont-tablero">
             <div class="cont-fichas-azules" ondrop="drop(event)" ondragover="allowDrop(event)">
-                <div class="ficha-azul s" draggable="true" ondragstart="drag(event)" id="a1-s">S</div>
-                <div class="ficha-azul s" draggable="true" ondragstart="drag(event)" id="a2-s">S</div>
-                <div class="ficha-azul s" draggable="true" ondragstart="drag(event)" id="a3-s">S</div>
-                <div class="ficha-azul l" draggable="true" ondragstart="drag(event)" id="a4-l">L</div>
-                <div class="ficha-azul l" draggable="true" ondragstart="drag(event)" id="a5-l">L</div>
-                <div class="ficha-azul l" draggable="true" ondragstart="drag(event)" id="a6-l">L</div>
-                <div class="ficha-azul xl" draggable="true" ondragstart="drag(event)" id="a7-x">XL</div>
-                <div class="ficha-azul xl" draggable="true" ondragstart="drag(event)" id="a8-x">XL</div>
-                <div class="ficha-azul xl" draggable="true" ondragstart="drag(event)" id="a9-x">XL</div>
+                <div class="ficha-azul s" draggable="true" ondragstart="drag(event)" id="a1-s"></div>
+                <div class="ficha-azul s" draggable="true" ondragstart="drag(event)" id="a2-s"></div>
+                <div class="ficha-azul s" draggable="true" ondragstart="drag(event)" id="a3-s"></div>
+                <div class="ficha-azul l" draggable="true" ondragstart="drag(event)" id="a4-l"></div>
+                <div class="ficha-azul l" draggable="true" ondragstart="drag(event)" id="a5-l"></div>
+                <div class="ficha-azul l" draggable="true" ondragstart="drag(event)" id="a6-l"></div>
+                <div class="ficha-azul xl" draggable="true" ondragstart="drag(event)" id="a7-x"></div>
+                <div class="ficha-azul xl" draggable="true" ondragstart="drag(event)" id="a8-x"></div>
+                <div class="ficha-azul xl" draggable="true" ondragstart="drag(event)" id="a9-x"></div>
             </div>
             <div class="tablero">
                 <div class="casilla-tablero" ondrop="drop(event)" ondragover="allowDrop(event)" id="1-1"></div>
@@ -42,18 +42,18 @@
                 <div class="casilla-tablero" ondrop="drop(event)" ondragover="allowDrop(event)" id="3-3"></div>
             </div>
             <div class="cont-fichas-naranjas" ondrop="drop(event)" ondragover="allowDrop(event)">
-                <div class="ficha-naranja s" draggable="true" ondragstart="drag(event)" id="n1-s">S</div>
-                <div class="ficha-naranja s" draggable="true" ondragstart="drag(event)" id="n2-s">S</div>
-                <div class="ficha-naranja s" draggable="true" ondragstart="drag(event)" id="n3-s">S</div>
-                <div class="ficha-naranja l" draggable="true" ondragstart="drag(event)" id="n4-l">L</div>
-                <div class="ficha-naranja l" draggable="true" ondragstart="drag(event)" id="n5-l">L</div>
-                <div class="ficha-naranja l" draggable="true" ondragstart="drag(event)" id="n6-l">L</div>
-                <div class="ficha-naranja xl" draggable="true" ondragstart="drag(event)" id="n7-x">XL</div>
-                <div class="ficha-naranja xl" draggable="true" ondragstart="drag(event)" id="n8-x">XL</div>
-                <div class="ficha-naranja xl" draggable="true" ondragstart="drag(event)" id="n9-x">XL</div>
+                <div class="ficha-naranja s" draggable="true" ondragstart="drag(event)" id="n1-s"></div>
+                <div class="ficha-naranja s" draggable="true" ondragstart="drag(event)" id="n2-s"></div>
+                <div class="ficha-naranja s" draggable="true" ondragstart="drag(event)" id="n3-s"></div>
+                <div class="ficha-naranja l" draggable="true" ondragstart="drag(event)" id="n4-l"></div>
+                <div class="ficha-naranja l" draggable="true" ondragstart="drag(event)" id="n5-l"></div>
+                <div class="ficha-naranja l" draggable="true" ondragstart="drag(event)" id="n6-l"></div>
+                <div class="ficha-naranja xl" draggable="true" ondragstart="drag(event)" id="n7-x"></div>
+                <div class="ficha-naranja xl" draggable="true" ondragstart="drag(event)" id="n8-x"></div>
+                <div class="ficha-naranja xl" draggable="true" ondragstart="drag(event)" id="n9-x"></div>
             </div>
         </div>
-        <div class="cont-frenesi">
+        <div id="cont-frenesi" class="cont-frenesi inactiva">
             <button id="btn-frenesi" >
                 <img src="img/fuegote.png" alt="" height="80px" width="80px">
             </button>
@@ -63,7 +63,7 @@
     <div id="alerta" class="alerta inactiva">
         <div id="micro-alerta">
           <div class="ranking" id="ranking">
-            VICTORIA de
+            VICTORIA de 
           </div>
           <button id="inicio">Inicio</button>
           <button id="revancha">Revancha</button>
