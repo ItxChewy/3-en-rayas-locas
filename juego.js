@@ -14,6 +14,7 @@ let partidaAcabada = false;
 let ranking;
 let caja_turno;
 let contenedorNaranja;
+let sorteo;
 
 window.addEventListener("load", inicio);
 
@@ -33,8 +34,17 @@ function inicio() {
   btn_revancha = document.getElementById("revancha");
   btn_inicio = document.getElementById("inicio");
 
-
-  
+  if (turnoActual === 0) {
+    turnoInicial();
+    if (sorteo === 0) {
+      document.getElementById("turno").textContent = "AZUL";
+      caja_turno[0].style.backgroundColor = "#09f";
+    } else {
+      document.getElementById("turno").textContent = "NARANJA";
+      caja_turno[0].style.backgroundColor = "orange";
+      turnoActual++;
+    }
+  }
 
   const tiempoParseado = parseInt(datoTiempo.textContent);
   document.getElementById("btn-frenesi").addEventListener("click", activarModoFrenesi);
@@ -99,11 +109,11 @@ function comprobarFichas(data, ev) {
       if (ev.target.classList.contains('casilla-tablero')) {
         console.log(parent)
         console.log("Tiene hijos? ")
-       
         var ficha = document.getElementById(data);
         if(ev.target.hasChildNodes()){
           if(ev.target.firstChild.classList.contains('xl')){
-            alert("errorrr")
+            // alert("errorrr")
+          comprobarFichas(data, ev) //con esto soluciono poner ficha sobre la otra y que no salte turno
           } else if(ev.target.firstChild.classList.contains('l') || ev.target.firstChild.classList.contains('s')) {
             ev.target.removeChild(ev.target.firstChild);
             ev.target.appendChild(ficha);
@@ -116,24 +126,21 @@ function comprobarFichas(data, ev) {
       } else {
         if (ev.target.classList.contains('ficha-azul') || ev.target.classList.contains('ficha-naranja')) {
           if (ev.target.classList.contains('l')) {
-            let parent = ev.target.parentNode; //MIRAR AQUI EL ERROR, LO SOLUCIONAMOS DESPUES DEL RECREO PERO ESTÁ AQUÍ 
+            let parent = ev.target.parentNode; //MIRAR AQUI EL ERROR, LO SOLUCIONAMOS DESPUES DEL RECREO PERO ESTÃ AQUÃ 
             console.log("El padre es: " + parent)
             parent.removeChild(parent.firstChild);
-          // parent.appendChild(document.getElementById(data));
-          parent.appendChild(document.getElementById(data));
-
-            // parent.removeChild(parent.firstChild);
-            // parent.appendChild(document.getElementById(data));
+            parent.appendChild(document.getElementById(data));
             document.getElementById(data).draggable = false; // Desactiva la capacidad de arrastre
           } else if (ev.target.classList.contains('s')) {
-          let parent = ev.target.parentNode; //MIRAR AQUI EL ERROR, LO SOLUCIONAMOS DESPUES DEL RECREO PERO ESTÁ AQUÍ 
+           let parent = ev.target.parentNode; //MIRAR AQUI EL ERROR, LO SOLUCIONAMOS DESPUES DEL RECREO PERO ESTÃ AQUÃ 
 
           parent.removeChild(parent.firstChild);
           // parent.appendChild(document.getElementById(data));
           parent.appendChild(document.getElementById(data));
           document.getElementById(data).draggable = false; // Desactiva la capacidad de arrastre
         } else {
-          alert("No puedes poner aquí");
+          comprobarFichas(data, ev)
+          alert("No puedes poner aquÃ­");
         }
       }
     }
@@ -151,7 +158,8 @@ function comprobarFichas(data, ev) {
         var ficha = document.getElementById(data);
         if(ev.target.hasChildNodes()){
           if(ev.target.firstChild.classList.contains('l')){
-            alert("errorrr")
+            // alert("errorrr")
+            comprobarFichas(data, ev)
           } else if(ev.target.firstChild.classList.contains('s')) {
             ev.target.removeChild(ev.target.firstChild);
             ev.target.appendChild(ficha);
@@ -164,24 +172,46 @@ function comprobarFichas(data, ev) {
       } else {
         if (ev.target.classList.contains('ficha-azul') || ev.target.classList.contains('ficha-naranja')) {
          if (ev.target.classList.contains('s')) {
-          let parent = ev.target.parentNode; //MIRAR AQUI EL ERROR, LO SOLUCIONAMOS DESPUES DEL RECREO PERO ESTÁ AQUÍ 
+          let parent = ev.target.parentNode; //MIRAR AQUI EL ERROR, LO SOLUCIONAMOS DESPUES DEL RECREO PERO ESTÃ AQUÃ 
           parent.removeChild(parent.firstChild);
           // parent.appendChild(document.getElementById(data));
           parent.appendChild(document.getElementById(data));
           document.getElementById(data).draggable = false; // Desactiva la capacidad de arrastre
         } else {
-          alert("No puedes poner aquí");
+          alert("No puedes poner aquÃ­");
         }
       }
     }
       // console.log(data);
       break;
     case 's':
-      if (!ev.target.hasChildNodes()) {
+      if (ev.target.classList.contains('casilla-tablero')) {
+        console.log(parent)
+        console.log("Tiene hijos? ")
+       
         var ficha = document.getElementById(data);
-        ev.target.appendChild(ficha);
+        if(!ev.target.hasChildNodes()){
+          ev.target.appendChild(ficha);
+        } else {
+          comprobarFichas(data, ev) //con esto soluciono poner ficha sobre la otra y que no salte turno
+        }
         ficha.draggable = false; // Desactiva la capacidad de arrastre
+      } else {
+        if (ev.target.classList.contains('ficha-azul') || ev.target.classList.contains('ficha-naranja')) {
+         if (ev.target.classList.contains('s') || ev.target.classList.contains('l') || ev.target.classList.contains('xl')) {
+          comprobarFichas(data, ev) //con esto soluciono poner ficha sobre la otra y que no salte turno
+        } 
       }
+      document.getElementById(data).draggable = false; // Desactiva la capacidad de arrastre
+
+    }
+      // if (!ev.target.hasChildNodes()) {
+      //   var ficha = document.getElementById(data);
+      //   ev.target.appendChild(ficha);
+      //   ficha.draggable = false; // Desactiva la capacidad de arrastre
+      // } else {
+      //   comprobarFichas(data, ev)
+      // }
       // console.log(data);
       break;
     default:
@@ -210,6 +240,11 @@ function drop(ev) {
     }
 }
 
+function turnoInicial() {
+  sorteo = Math.random();
+  sorteo = Math.round(sorteo);
+}
+
 function turnos() {
   if (turnoActual % 2 != 0) {
     document.getElementById("turno").textContent = "AZUL";
@@ -222,10 +257,17 @@ function turnos() {
 }
 
 function comprobarTurno(){
-  if(turnoActual >=3){
-    document.getElementById("cont-frenesi").classList.remove("inactiva");
+  if(sorteo==0){
+    if(turnoActual >=5){
+      document.getElementById("cont-frenesi").classList.remove("inactiva");
+    }
+  }else{
+    if(turnoActual >=6){
+      document.getElementById("cont-frenesi").classList.remove("inactiva");
+    }
   }
 }
+
 function comprobaciones(){
   comprobarDiagonal();
   comprobarVertical();
@@ -417,5 +459,6 @@ function comprobarDiagonal(){
     caja_boton.style.display = "none";
     click++;
   }
+
 
 

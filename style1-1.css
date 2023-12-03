@@ -29,10 +29,6 @@ font-size: 50px;
 padding-top: 100px;
 }
 
-p {
-margin-top: 60px;
-}
-
 form {
 box-shadow: 0px 21px 26px 11px rgba(3, 3, 3, 0.452);
 display: flex;
@@ -111,6 +107,7 @@ animation: movimientosLocos 1s infinite;
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
   background-color: snow;
   width: 25%;
   border-radius: 5px;
@@ -136,6 +133,7 @@ animation: movimientosLocos 1s infinite;
   border-radius: 5px;
 }
 #micro-alerta input:hover{
+  cursor: pointer;
   background-color: limegreen;
 }
 
@@ -146,6 +144,24 @@ animation: movimientosLocos 1s infinite;
   border-radius: 20px;
   font-weight: bold;
   cursor: no-drop;
+}
+
+#normas{
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 5px;
+  width: 150px;
+  text-align: center;
+  border: 1px solid black;
+  font-weight: bold;
+  color: black;
+  transition: 0.5s ease;
+  margin-top: 1em;
+}
+
+#normas:hover{
+  background-color: rgba(210, 105, 30, 0.5);
+  color: white;
 }
 
 .inactiva{
