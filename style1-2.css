@@ -28,7 +28,6 @@ body{
     background-color: #09f;
     text-align: center;
     padding: 10px; /* Igual genera margen arriba, checkear por si acaso al final esto */
-    /* background-color: white; */
     margin-top: 10px;
     margin-bottom: 10px;
     border: 1px solid black;
@@ -66,15 +65,6 @@ body{
     align-self: center;
     padding: 15px;
     background-color: rgba(53, 117, 255, 0.178);
-    /* display: grid;
-    grid-template-columns: repeat(3,150px);
-    grid-template-rows: repeat(3,150px);
-    gap: 50px;
-    border: 3px solid #09f;
-    border-radius: 20px;
-    height: 70%;
-    align-self: center; */
-
 }
 .ficha-azul{
     border-radius: 100%;
@@ -163,7 +153,6 @@ body{
     font-weight: bold;
 }
 .s{
-    /* align-self: flex-end; */
     width: 30%;
     height: 30%;
 }
@@ -199,7 +188,7 @@ body{
 .inactiva{
     display: none;
 }
-/* nuevo que he hecho yo aaron*/
+
 .cont-frenesi{
     display: flex;
     flex-direction: column;
@@ -302,8 +291,6 @@ body{
         flex-direction: row;
     }
      .tablero{
-        /* width: 400px;
-        height: 400px; */
         border: 0;
         padding: 0;
     } 
@@ -318,7 +305,6 @@ body{
         width: 250px;
         padding: 5px;
         gap: 5px;
-        /* border: none; */
     }
     .s{
         width: 2em;
@@ -379,8 +365,6 @@ body{
         flex-direction: column;
     }
      .tablero{
-        /* width: 400px;
-        height: 400px; */
         border: 0;
         padding: 0;
     } 
